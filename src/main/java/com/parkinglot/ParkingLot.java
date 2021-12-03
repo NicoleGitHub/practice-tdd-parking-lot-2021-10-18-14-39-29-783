@@ -1,6 +1,8 @@
 package com.parkinglot;
 
 import java.util.HashMap;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ParkingLot {
 
@@ -20,6 +22,7 @@ public class ParkingLot {
     public Ticket park(Car car) {
         if (hasAvailablePosition()) {
             Ticket ticket = new Ticket();
+            car.setTicket(ticket);
             ticketCarMap.put(ticket, car);
 
             return ticket;
@@ -31,7 +34,13 @@ public class ParkingLot {
         return ticketCarMap.size() < capacity;
     }
 
+    private boolean validateTicket(Ticket ticket) {
+        return ticketCarMap.containsKey(ticket);
+    }
+
     public Car fetch(Ticket ticket) {
-        return new Car();
+        return validateTicket(ticket)
+                ? ticketCarMap.entrySet().stream().filter(key -> key.getKey().equals(ticket)).collect(Collectors.toList()).get(0).getValue()
+                : null;
     }
 }
