@@ -1,7 +1,8 @@
 package com.parkinglot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collector;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParkingLot {
@@ -9,6 +10,7 @@ public class ParkingLot {
     public static int DEFAULT_CAPACITY = 10;
 
     HashMap<Ticket, Car> ticketCarMap = new HashMap<>();   //   [[key, value],[key, value],[key, value] ... ]
+    List<Ticket> usedTickets = new ArrayList<>();
     private int capacity;
 
     public ParkingLot(int capacity) {
@@ -34,13 +36,17 @@ public class ParkingLot {
     }
 
     private boolean validateTicket(Ticket ticket) {
-        boolean check = ticketCarMap.containsKey(ticket);
-        return ticketCarMap.containsKey(ticket);
+        return ticketCarMap.containsKey(ticket) && !usedTickets.contains(ticket);
     }
 
     public Car fetch(Ticket ticket) {
-        return validateTicket(ticket)
-                ? ticketCarMap.entrySet().stream().filter(key -> key.getKey().equals(ticket)).collect(Collectors.toList()).get(0).getValue()
-                : null;
+        if (validateTicket(ticket)) {
+            Car fetchedCar = ticketCarMap.entrySet().stream().filter(key -> key.getKey().equals(ticket)).collect(Collectors.toList()).get(0).getValue();
+            ticketCarMap.remove(fetchedCar);
+            usedTickets.add(ticket);
+            return fetchedCar;
+        }
+        return null;
     }
+
 }
