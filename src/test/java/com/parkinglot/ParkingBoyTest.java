@@ -132,6 +132,8 @@ public class ParkingBoyTest {
             parkingBoy.park(new Car());
         });
         assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
+        assertEquals(0, parkingLot1.getAvailablePosition());
+        assertEquals(0, parkingLot2.getAvailablePosition());
     }
 
 }

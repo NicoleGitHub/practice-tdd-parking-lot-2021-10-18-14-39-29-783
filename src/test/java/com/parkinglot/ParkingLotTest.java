@@ -116,6 +116,7 @@ public class ParkingLotTest {
             parkingLot.park(car);
         });
         assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
+        assertEquals(0, parkingLot.getAvailablePosition());
     }
 
     @Test
