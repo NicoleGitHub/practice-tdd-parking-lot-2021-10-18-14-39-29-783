@@ -13,4 +13,8 @@ public class SmartParkingBoy {
     public Ticket park(Car car) {
         return parkingLots.stream().reduce((parkingLot, nextParkingLot) -> nextParkingLot.getAvailablePosition() > parkingLot.getAvailablePosition() ? nextParkingLot : parkingLot).get().park(car);
     }
+
+    public Car fetch(Ticket ticket1) {
+        return null;
+    }
 }
