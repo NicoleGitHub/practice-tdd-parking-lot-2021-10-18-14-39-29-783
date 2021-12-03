@@ -24,7 +24,6 @@ public class ParkingLot {
             Ticket ticket = new Ticket();
             car.setTicket(ticket);
             ticketCarMap.put(ticket, car);
-
             return ticket;
         }
         return null;
@@ -35,6 +34,7 @@ public class ParkingLot {
     }
 
     private boolean validateTicket(Ticket ticket) {
+        boolean check = ticketCarMap.containsKey(ticket);
         return ticketCarMap.containsKey(ticket);
     }
 

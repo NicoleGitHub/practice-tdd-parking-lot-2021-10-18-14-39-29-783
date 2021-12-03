@@ -66,6 +66,6 @@ public class ParkingLotTest {
 
         //then
         assertEquals(car1, fetchedCar1);
-        assertEquals(car1, fetchedCar2);
+        assertEquals(car2, fetchedCar2);
     }
 }
