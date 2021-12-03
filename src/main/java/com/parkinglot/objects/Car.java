@@ -1,4 +1,4 @@
-package com.parkinglot;
+package com.parkinglot.objects;
 
 public class Car {
     private Ticket ticket;

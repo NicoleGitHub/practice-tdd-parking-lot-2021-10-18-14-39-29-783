@@ -1,10 +1,12 @@
-package com.parkinglot;
+package com.parkinglot.objects;
+
+import com.parkinglot.exception.NoAvailablePositionException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.parkinglot.ErrorMessage.*;
+import static com.parkinglot.exception.ErrorMessage.*;
 
 public class ParkingLot {
 
