@@ -1,7 +1,6 @@
 package com.parkinglot.objects;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParkingBoy {
     private ArrayList<ParkingLot> parkingLots;
@@ -15,6 +14,6 @@ public class ParkingBoy {
     }
 
     public Car fetch(Ticket ticket) {
-        return new Car();
+        return parkingLots.stream().reduce((parkingLot, nextParkingLot) -> parkingLot.validateTicket(ticket) ? parkingLot : nextParkingLot).get().fetch(ticket);
     }
 }

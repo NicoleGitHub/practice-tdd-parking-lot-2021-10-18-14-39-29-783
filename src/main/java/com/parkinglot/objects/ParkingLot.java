@@ -39,7 +39,7 @@ public class ParkingLot {
         return ticketCarMap.size() < capacity;
     }
 
-    private boolean validateTicket(Ticket ticket) {
+    boolean validateTicket(Ticket ticket) {
         return ticketCarMap.containsKey(ticket) && !usedTickets.contains(ticket);
     }
 
