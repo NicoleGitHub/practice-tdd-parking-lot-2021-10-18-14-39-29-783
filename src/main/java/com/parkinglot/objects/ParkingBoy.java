@@ -9,6 +9,10 @@ public class ParkingBoy {
         this.parkingLots = parkingLots;
     }
 
+    public ArrayList<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
     public Ticket park(Car car) {
         return parkingLots.stream().reduce((parkingLot, nextParkingLot) -> parkingLot.getAvailablePosition() > 0 ? parkingLot : nextParkingLot).get().park(car);
     }
