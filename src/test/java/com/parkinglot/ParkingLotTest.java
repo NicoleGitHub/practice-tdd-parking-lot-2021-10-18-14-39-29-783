@@ -125,12 +125,12 @@ public class ParkingLotTest {
         Car car = new Car();
         parkingLot.park(car);
         parkingLot.fetch(car.getTicket());
-        Ticket usedTicket = car.getTicket();
+        Ticket wrongTicket = new Ticket();
 
         //when
         //then
         UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingLot.fetch(usedTicket);
+            parkingLot.fetch(wrongTicket);
         });
         assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
     }
