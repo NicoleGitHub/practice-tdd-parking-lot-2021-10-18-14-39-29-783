@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.parkinglot.ErrorMessage.*;
+
 public class ParkingLot {
 
     public static int DEFAULT_CAPACITY = 10;
@@ -27,7 +29,7 @@ public class ParkingLot {
             ticketCarMap.put(ticket, car);
             return ticket;
         }
-        return null;
+        throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
     }
 
     private boolean hasAvailablePosition() {
@@ -45,8 +47,6 @@ public class ParkingLot {
             usedTickets.add(ticket);
             return fetchedCar;
         }
-
-
         return null;
     }
 
