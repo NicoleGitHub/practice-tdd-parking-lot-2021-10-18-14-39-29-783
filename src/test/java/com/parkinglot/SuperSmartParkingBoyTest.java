@@ -86,6 +86,23 @@ public class SuperSmartParkingBoyTest {
         assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
     }
 
+    @Test
+    void should_throw_unrecognized_parking_ticket_when_fetch_car_given_smart_parking_boy_manage_two_parking_lots_both_available_and_used_parking_tickets() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        Car car1 = new Car();
+        Ticket usedTicket = parkingLot1.park(car1);
+        SmartParkingBoy superSmartParkingBoy = new SmartParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
+        parkingLot1.fetch(usedTicket);
+
+        //when
+        //then
+        UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            superSmartParkingBoy.fetch(usedTicket);
+        });
+        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
+    }
+
 
 
 

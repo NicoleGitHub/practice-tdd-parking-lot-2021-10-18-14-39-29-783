@@ -11,4 +11,5 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     public Ticket park(Car car) {
         return getParkingLots().stream().reduce((parkingLot, nextParkingLot) -> nextParkingLot.getAvailablePositionRate() > parkingLot.getAvailablePositionRate() ? nextParkingLot : parkingLot).get().park(car);
     }
+
 }
