@@ -119,6 +119,23 @@ public class ParkingLotTest {
     }
 
     @Test
+    void should_throw_unrecognized_parking_ticket_when_fetch_car_given_parking_lot_and_wrong_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        parkingLot.park(car);
+        parkingLot.fetch(car.getTicket());
+        Ticket usedTicket = car.getTicket();
+
+        //when
+        //then
+        UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkingLot.fetch(usedTicket);
+        });
+        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
+    }
+
+    @Test
     void should_throw_unrecognized_parking_ticket_when_fetch_car_given_parking_lot_and_used_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot();
