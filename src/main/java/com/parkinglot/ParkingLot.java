@@ -8,8 +8,8 @@ public class ParkingLot {
 
     public static int DEFAULT_CAPACITY = 10;
 
-    HashMap<Ticket, Car> ticketCarMap = new HashMap<>();
-    List<Ticket> usedTickets = new ArrayList<>();
+    private HashMap<Ticket, Car> ticketCarMap = new HashMap<>();
+    private List<Ticket> usedTickets = new ArrayList<>();
     private int capacity;
 
     public ParkingLot(int capacity) {
@@ -40,11 +40,13 @@ public class ParkingLot {
 
     public Car fetch(Ticket ticket) {
         if (validateTicket(ticket)) {
-            Car fetchedCar = ticketCarMap.entrySet().stream().filter(key -> key.getKey().equals(ticket)).findFirst().get().getValue();
+            Car fetchedCar = ticketCarMap.get(ticket);
             ticketCarMap.remove(fetchedCar);
             usedTickets.add(ticket);
             return fetchedCar;
         }
+
+
         return null;
     }
 

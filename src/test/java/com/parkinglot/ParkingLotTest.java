@@ -95,4 +95,20 @@ public class ParkingLotTest {
         //then
         assertNull(fetchedCar);
     }
+
+    @Test
+    void should_throw_no_available_position_when_park_car_given_parking_lot_without_position_and_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.park(new Car());
+        Car car = new Car();
+
+        //when
+        //then
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingLot.park(car);
+        });
+
+        assertEquals("No available position.", noAvailablePositionException.getMessage());
+    }
 }
