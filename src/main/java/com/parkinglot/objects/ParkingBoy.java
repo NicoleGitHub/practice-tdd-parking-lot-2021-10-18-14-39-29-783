@@ -1,13 +1,16 @@
 package com.parkinglot.objects;
 
-public class ParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.ArrayList;
+import java.util.List;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private ArrayList<ParkingLot> parkingLots;
+
+    public ParkingBoy(ArrayList<ParkingLot> parkingLots) {
+        this.parkingLots = parkingLots;
     }
 
     public Ticket park(Car car) {
-        return parkingLot.park(car);
+        return parkingLots.stream().filter(parkingLot -> parkingLot.getAvailablePosition() > 0).findFirst().get().park(car);
     }
 }
