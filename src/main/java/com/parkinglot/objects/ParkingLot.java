@@ -1,6 +1,7 @@
 package com.parkinglot.objects;
 
 import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedParkingTicketException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class ParkingLot {
             usedTickets.add(ticket);
             return fetchedCar;
         }
-        return null;
+        throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET);
     }
 
 }

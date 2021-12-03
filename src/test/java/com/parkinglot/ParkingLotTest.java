@@ -72,36 +72,36 @@ public class ParkingLotTest {
         assertEquals(car2, fetchedCar2);
     }
 
-    @Test
-    void should_return_nothing_when_fetch_car_given_parking_lot_and_wrong_ticket() {
-        //given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
-        parkingLot.park(car);
+//    @Test
+//    void should_return_nothing_when_fetch_car_given_parking_lot_and_wrong_ticket() {
+//        //given
+//        ParkingLot parkingLot = new ParkingLot();
+//        Car car = new Car();
+//        parkingLot.park(car);
+//
+//        //when
+//        Ticket wrongTicket = new Ticket();
+//        Car fetchedCar = parkingLot.fetch(wrongTicket);
+//
+//        //then
+//        assertNull(fetchedCar);
+//    }
 
-        //when
-        Ticket wrongTicket = new Ticket();
-        Car fetchedCar = parkingLot.fetch(wrongTicket);
-
-        //then
-        assertNull(fetchedCar);
-    }
-
-    @Test
-    void should_return_nothing_when_fetch_car_given_parking_lot_and_used_ticket() {
-        //given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
-        parkingLot.park(car);
-        parkingLot.fetch(car.getTicket());
-        Ticket usedTicket = car.getTicket();
-
-        //when
-        Car fetchedCar = parkingLot.fetch(usedTicket);
-
-        //then
-        assertNull(fetchedCar);
-    }
+//    @Test
+//    void should_return_nothing_when_fetch_car_given_parking_lot_and_used_ticket() {
+//        //given
+//        ParkingLot parkingLot = new ParkingLot();
+//        Car car = new Car();
+//        parkingLot.park(car);
+//        parkingLot.fetch(car.getTicket());
+//        Ticket usedTicket = car.getTicket();
+//
+//        //when
+//        Car fetchedCar = parkingLot.fetch(usedTicket);
+//
+//        //then
+//        assertNull(fetchedCar);
+//    }
 
     @Test
     void should_throw_no_available_position_when_park_car_given_parking_lot_without_position_and_car() {
@@ -112,7 +112,9 @@ public class ParkingLotTest {
 
         //when
         //then
-        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> { parkingLot.park(car); });
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingLot.park(car);
+        });
         assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
     }
 
@@ -127,7 +129,9 @@ public class ParkingLotTest {
 
         //when
         //then
-        UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> { parkingLot.fetch(usedTicket); });
-        assertEquals(NO_AVAILABLE_POSITION, unrecognizedParkingTicketException.getMessage());
+        UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkingLot.fetch(usedTicket);
+        });
+        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
     }
 }
