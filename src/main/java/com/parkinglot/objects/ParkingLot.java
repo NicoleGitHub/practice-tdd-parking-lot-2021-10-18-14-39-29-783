@@ -56,4 +56,7 @@ public class ParkingLot {
     public int getAvailablePosition() {
         return capacity - ticketCarMap.size();
     }
+    public Double getAvailablePositionRate() {
+        return Double.valueOf(getAvailablePosition()/capacity);
+    }
 }
