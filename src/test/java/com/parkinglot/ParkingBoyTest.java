@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
 import com.parkinglot.objects.Car;
 import com.parkinglot.objects.ParkingBoy;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.parkinglot.exception.ErrorMessage.NO_AVAILABLE_POSITION;
 import static com.parkinglot.exception.ErrorMessage.UNRECOGNIZED_PARKING_TICKET;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -113,6 +115,23 @@ public class ParkingBoyTest {
             parkingBoy.fetch(usedTicket);
         });
         assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
+    }
+
+    @Test
+    void should_no_person_available_when_park_car_given_standard_parking_boy_manage_two_parking_lots_both_unavailable_and_full() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
+        while (parkingLot1.getAvailablePosition() > 0 || parkingLot2.getAvailablePosition() > 0) {
+            parkingBoy.park(new Car());
+        }
+
+        //when
+        //then
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingBoy.park(new Car());
+        });
+        assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
     }
 
 }
