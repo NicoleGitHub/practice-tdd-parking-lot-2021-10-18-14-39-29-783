@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
-    // Case 1 - Given a parking lot, and a car, When park the car, Then return a parking ticket
-
     @Test
     void should_return_ticket_when_park_car_given_parking_lot_and_car_() {
         //given
@@ -21,14 +19,12 @@ public class ParkingLotTest {
         assertNotNull(ticket);
     }
 
-    // Case 2 - Given a parking lot without any position, and a car, When park the car, Then return nothing
-
     @Test
     void should_return_null_when_park_car_given_full_parking_lot_and_car_() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-        parkingLot.park(car); // full parkingLot
+        parkingLot.park(car);
 
         //when
         Ticket ticket = parkingLot.park(car);
