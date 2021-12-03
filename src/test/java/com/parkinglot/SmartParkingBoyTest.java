@@ -73,13 +73,13 @@ public class SmartParkingBoyTest {
     void should_throw_unrecognized_parking_ticket_when_fetch_car_given_smart_parking_boy_manage_two_parking_lots_both_available_and_wrong_parking_tickets() {
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
         Ticket wrongTicket = new Ticket();
 
         //when
         //then
         UnrecognizedParkingTicketException unrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingBoy.fetch(wrongTicket);
+            smartParkingBoy.fetch(wrongTicket);
         });
         assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
     }
@@ -90,7 +90,7 @@ public class SmartParkingBoyTest {
 //        ParkingLot parkingLot2 = new ParkingLot();
 //        Car car1 = new Car();
 //        Ticket usedTicket = parkingLot1.park(car1);
-//        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
+//        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
 //        parkingLot1.fetch(usedTicket);
 //
 //        //when
@@ -100,12 +100,12 @@ public class SmartParkingBoyTest {
 //        });
 //        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedParkingTicketException.getMessage());
 //    }
-//
+
 //    @Test
 //    void should_no_person_available_when_park_car_given_smart_parking_boy_manage_two_parking_lots_both_unavailable_and_full() {
 //        ParkingLot parkingLot1 = new ParkingLot();
 //        ParkingLot parkingLot2 = new ParkingLot();
-//        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
+//        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
 //        while (parkingLot1.getAvailablePosition() > 0 || parkingLot2.getAvailablePosition() > 0) {
 //            parkingBoy.park(new Car());
 //        }
