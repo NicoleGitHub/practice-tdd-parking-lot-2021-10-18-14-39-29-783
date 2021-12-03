@@ -30,7 +30,6 @@ public class ParkingLot {
             Ticket ticket = new Ticket();
             car.setTicket(ticket);
             ticketCarMap.put(ticket, car);
-            capacity--;
             return ticket;
         }
         throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
@@ -49,13 +48,12 @@ public class ParkingLot {
             Car fetchedCar = ticketCarMap.get(ticket);
             ticketCarMap.remove(fetchedCar);
             usedTickets.add(ticket);
-            capacity++;
             return fetchedCar;
         }
         throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET);
     }
 
     public int getAvailablePosition() {
-        return 0;
+        return capacity - ticketCarMap.size();
     }
 }
