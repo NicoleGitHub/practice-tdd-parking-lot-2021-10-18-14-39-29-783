@@ -25,21 +25,6 @@ public class ParkingLotTest {
         assertNotNull(ticket);
     }
 
-//    STORY 1
-//    @Test
-//    void should_return_null_when_park_car_given_full_parking_lot_and_car() {
-//        //given
-//        ParkingLot parkingLot = new ParkingLot(1);
-//        Car car = new Car();
-//        parkingLot.park(car);
-//
-//        //when
-//        Ticket ticket = parkingLot.park(car);
-//
-//        //then
-//        assertNull(ticket);
-//    }
-
     @Test
     void should_return_parked_car_when_fetch_car_given_parking_lot_and_parked_car() {
         //given
@@ -68,40 +53,12 @@ public class ParkingLotTest {
         Car fetchedCar2 = parkingLot.fetch(car2.getTicket());
 
         //then
-        assertEquals(car1, fetchedCar1);
-        assertEquals(car2, fetchedCar2);
+        assertAll(
+                () -> assertEquals(fetchedCar1, car1),
+                () -> assertEquals(fetchedCar2, car2)
+        );
+
     }
-
-//    @Test
-//    void should_return_nothing_when_fetch_car_given_parking_lot_and_wrong_ticket() {
-//        //given
-//        ParkingLot parkingLot = new ParkingLot();
-//        Car car = new Car();
-//        parkingLot.park(car);
-//
-//        //when
-//        Ticket wrongTicket = new Ticket();
-//        Car fetchedCar = parkingLot.fetch(wrongTicket);
-//
-//        //then
-//        assertNull(fetchedCar);
-//    }
-
-//    @Test
-//    void should_return_nothing_when_fetch_car_given_parking_lot_and_used_ticket() {
-//        //given
-//        ParkingLot parkingLot = new ParkingLot();
-//        Car car = new Car();
-//        parkingLot.park(car);
-//        parkingLot.fetch(car.getTicket());
-//        Ticket usedTicket = car.getTicket();
-//
-//        //when
-//        Car fetchedCar = parkingLot.fetch(usedTicket);
-//
-//        //then
-//        assertNull(fetchedCar);
-//    }
 
     @Test
     void should_throw_no_available_position_when_park_car_given_parking_lot_without_position_and_car() {
@@ -115,8 +72,11 @@ public class ParkingLotTest {
         NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
             parkingLot.park(car);
         });
-        assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
-        assertEquals(0, parkingLot.getAvailablePosition());
+
+        assertAll(
+            () -> assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage()),
+            () -> assertEquals(0, parkingLot.getAvailablePositionCount())
+        );
     }
 
     @Test

@@ -25,11 +25,14 @@ public class SuperSmartParkingBoyTest {
         Ticket ticket = superSmartParkingBoy.park(new Car());
 
         //then
-        assertNotNull(ticket);
-        assertEquals(9, parkingLot1.getAvailablePosition());
-        assertEquals(10, parkingLot2.getAvailablePosition());
-        assertEquals(Double.valueOf(9/parkingLot1.getCapacity()), parkingLot1.getAvailablePositionRate());
-        assertEquals(Double.valueOf(10/parkingLot2.getCapacity()), parkingLot2.getAvailablePositionRate());
+        assertAll(
+                () -> assertNotNull(ticket),
+                () -> assertEquals(9, parkingLot1.getAvailablePositionCount()),
+                () -> assertEquals(10, parkingLot2.getAvailablePositionCount()),
+                () -> assertEquals(Double.valueOf(9/parkingLot1.getCapacity()), parkingLot1.getAvailablePositionRate()),
+                () -> assertEquals(Double.valueOf(10/parkingLot2.getCapacity()), parkingLot2.getAvailablePositionRate())
+        );
+
     }
 
     @Test
@@ -46,11 +49,14 @@ public class SuperSmartParkingBoyTest {
         Ticket ticket = superSmartParkingBoy.park(new Car());
 
         //then
-        assertNotNull(ticket);
-        assertEquals(9, parkingLot1.getAvailablePosition());
-        assertEquals(9, parkingLot2.getAvailablePosition());
-        assertEquals(Double.valueOf(9/parkingLot1.getCapacity()), parkingLot1.getAvailablePositionRate());
-        assertEquals(Double.valueOf(9/parkingLot2.getCapacity()), parkingLot2.getAvailablePositionRate());
+        assertAll(
+            () -> assertNotNull(ticket),
+            () -> assertEquals(9, parkingLot1.getAvailablePositionCount()),
+            () -> assertEquals(9, parkingLot2.getAvailablePositionCount()),
+            () -> assertEquals(Double.valueOf(9/parkingLot1.getCapacity()), parkingLot1.getAvailablePositionRate()),
+            () -> assertEquals(Double.valueOf(9/parkingLot2.getCapacity()), parkingLot2.getAvailablePositionRate())
+        );
+
     }
 
     @Test
@@ -69,8 +75,10 @@ public class SuperSmartParkingBoyTest {
         Car fetchedCar2 = superSmartParkingBoy.fetch(ticket2);
 
         //then
-        assertEquals(fetchedCar1, car1);
-        assertEquals(fetchedCar2, car2);
+        assertAll(
+            () -> assertEquals(fetchedCar1, car1),
+            () -> assertEquals(fetchedCar2, car2)
+        );
     }
 
     @Test
@@ -110,7 +118,7 @@ public class SuperSmartParkingBoyTest {
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         SmartParkingBoy superSmartParkingBoy = new SmartParkingBoy(new ArrayList<>(List.of(parkingLot1, parkingLot2)));
-        while (parkingLot1.getAvailablePosition() > 0 || parkingLot2.getAvailablePosition() > 0) {
+        while (parkingLot1.getAvailablePositionCount() > 0 || parkingLot2.getAvailablePositionCount() > 0) {
             superSmartParkingBoy.park(new Car());
         }
 
@@ -119,9 +127,11 @@ public class SuperSmartParkingBoyTest {
         NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
             superSmartParkingBoy.park(new Car());
         });
-        assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
-        assertEquals(0, parkingLot1.getAvailablePosition());
-        assertEquals(0, parkingLot2.getAvailablePosition());
+        assertAll(
+                () -> assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage()),
+                () -> assertEquals(0, parkingLot1.getAvailablePositionCount()),
+                () -> assertEquals(0, parkingLot2.getAvailablePositionCount())
+        );
     }
 
 }

@@ -53,11 +53,12 @@ public class ParkingLot {
         throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET);
     }
 
-    public int getAvailablePosition() {
+    public int getAvailablePositionCount() {
         return capacity - ticketCarMap.size();
     }
+
     public Double getAvailablePositionRate() {
-        return Double.valueOf(getAvailablePosition()/capacity);
+        return capacity==0 ? Double.valueOf(0) : Double.valueOf(getAvailablePositionCount()/capacity);
     }
 
     public int getCapacity() {
